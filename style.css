@@ -1,0 +1,40 @@
+*{
+    font-family: Arial;
+}
+
+.registrationAndLoginContainer{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin: 20px;
+    padding: 10px;
+}
+
+.bodyRegistrationAndLogin{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+
+}
+
+form{
+    display: flex;
+    flex-direction: column
+}
+
+.validForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-align: center;
+    background-color: forestgreen;
+    opacity: 60%;
+    height: 50px;
+    width: 100%;
+}

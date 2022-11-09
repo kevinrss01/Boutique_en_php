@@ -1,54 +1,97 @@
-# Devoir MVC
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS only -->
+        <link href="./style.css" rel="stylesheet" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <title>Registration</title>
+    </head>
+<?php
+include_once './Class/BDD.php';
+include_once './Models/UserManager.php';
+include_once './Controllers/UserController.php';
+include_once './Models/CategoriesManager.php';
+include_once './Controllers/CategoriesControler.php';
 
-Votre projet doit être réalisé en PHP Orienté Objet, en utilisant un modèle MVC
+?>
+<body>
+    <main>
+        <?php
+        session_start();
 
-## Consignes
+        if(isset($_SESSION['error'])){
+            echo $_SESSION['error'];
+            unset($_SESSION['error']); // Supprime une cellule de tableau
+        }
 
-Réaliser un micro `back-office` permettant à l'internaute :
-- [C] d'`ajouter` des produits,
-- [R] d'`afficher` la liste des produits,
-- [U] de `mettre à jour` des produits,
-- [D] de `supprimer` des produits.
+        if(isset($_SESSION['valid'])){
+            echo $_SESSION['valid'];
+            unset($_SESSION['valid']);
+        }
 
-Chaque produit doit posséder les données suivantes :
-- `nom`,
-- `description`,
-- `quantité`,
-- `prix`.
+        if(!isset($_COOKIE['email'])) { /////// IF NOT LOGGED /////////
+            echo "Cookie named email is not set";
+            if(isset($_GET['page'])){
+                switch ($_GET['page']) {
+                    case 'registration': // ?page=registration
+                        $ctrl = new UserController();
+                        if(!empty($_POST)){
+                            echo $ctrl->registration($_POST);
+                        }
+                        else{
+                            echo $ctrl->getForm();
+                        }
+                        break;
+                    case 'login':
+                        $ctrl = new UserController();
+                        if(!empty($_POST)){
+                            echo $ctrl->login($_POST);
+                        } else {
+                            echo $ctrl->getFormLogin();
+                        }
+                        break;
+                    default:
+                        // INDEX
+                        header('Location: index.php?page=registration');
+                        break;
+                }
+            }
+            else{
+                // 404
+                header('Location: index.php?page=registration');
+                echo '<h1>404</h1>';
+                echo '<p>Page introuvable</p>';
+            }
 
-Améliorer le `back-office` avec une gestion de catégories.
+        } else { /////// IF LOGGED /////////
+            echo "Email cookie is set";
+            if(isset($_GET['page'])){
+                switch ($_GET['page']) {
+                    case 'home':
+                        $ctrl = new CategoriesControler();
+                        echo $ctrl->getCategories();
+                        break;
+                    default:
+                        // INDEX
+                        header('Location: index.php?page=home');
+                        break;
+                }
+            }
+            else{
+                // 404
+                header('Location: index.php?page=registration');
 
-Vous devrez permettre à l'internaute :
-- [C] d'`ajouter` des catégories,
-- [R] d'`afficher` la liste des produits de la catégorie,
-- [U] de `mettre à jour` des catégories,
-- [D] de `supprimer` des catégories.
+            }
+        }
 
-Mettre en place un système de gestion des utilisateurs.
-On doit pouvoir :
-- s'inscrire (avec un rôle utilisateur par défaut),
-- se connecter (demander l'email et le mot de passe).
 
-L'un des utilisateurs doit posséder le role `Admin` et :
-- doit pouvoir modifier les droits des autres utilisateurs,
-- seul lui doit pouvoir utiliser le CRUD des produits et catégories. Les autres utilisateurs ne doivent pas avoir accès à ces pages.
 
-## Exemples de requêtes
 
-### Récupération de données
-`SELECT [colonnes] FROM [table] WHERE [condition];`
 
-### Ajout de données
-`INSERT INTO [table] ([colonne1], [colonne2], ...) VALUES ([valeur1], [valeur2], ...);`
-
-### Mise à jour de données
-`UPDATE [table] SET [colonne1] = [valeur1], [colonne2] = [valeur2], etc WHERE [condition];`
-
-### Suppression de données
-`DELETE FROM [table] WHERE [condition];`
-
-## Rendus
-
-Vous devez me rendre votre projet sur `github` avec un export de votre `base de données`.
-
-__Deadline :__ dimanche 13 novembre 2022, à 23h59 au plus tard.
+        ?>
+    </main>
+</body>
+</html>
