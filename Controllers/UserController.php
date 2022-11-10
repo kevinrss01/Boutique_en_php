@@ -29,28 +29,15 @@ class UserController extends UserManager
             if($this->getUser($formulaire) == true){
                 //User Found
                 $userData = $this->getAllUserDAta($formulaire);
-                echo '<p class="validForm">Vous êtes bien connecté.</p>';
-                echo '<p>'.$userData['email'].'</p>';
 
-                //Set Cookie
-                $cookie_name1 = "email";
-                $cookie_value1 = $userData['email'];
-                $cookie_name2 = "role";
-                $cookie_value2 = $userData['role'];
-                setcookie($cookie_name1, $cookie_value1, time() + (86400 * 30), "/");
-                setcookie($cookie_name2, $cookie_value2, time() + (86400 * 30), "/");
-
-                if(!isset($_COOKIE[$cookie_name1])) {
-                    echo "Cookie named '" . $cookie_name1 . "' is not set!";
-                } else {
-                    echo "Cookie '" . $cookie_name1 . "' is set!<br>";
+                //Set Session
+                $_SESSION['logged'] = "";
+                //If ADMIN
+                if($userData['role'] == 'ADMIN'){
+                    $_SESSION['ADMIN'] = "";
                 }
 
-                if(!isset($_COOKIE[$cookie_name2])) {
-                    echo "Cookie named '" . $cookie_name1 . "' is not set!";
-                } else {
-                    echo "Cookie '" . $cookie_name2 . "' is set!<br>";
-                }
+                header('Location: index.php?page=home');
 
             } else {
                 //Incorrect email or password
@@ -94,5 +81,12 @@ class UserController extends UserManager
         else{
             return false;
         }
+    }
+
+    //LOGOUT
+    public function logout(){
+        unset($_SESSION['logged']);
+        unset($_SESSION['ADMIN']);
+        header('Location: index.php?page=registration');
     }
 }

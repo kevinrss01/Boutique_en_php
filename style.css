@@ -2,19 +2,102 @@
     font-family: Arial;
 }
 
+#categories header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+/*#categories header a{
+    margin: 10px;
+    width: 250px;
+    height: 40px;
+    border: 1px solid black;
+    padding: 3px;
+    text-align: center;
+    border-radius: 10px;
+    transition: font-size 0.3s ease-in;
+}
+
+#categories header a:hover{
+    font-size: 17px;
+
+}*/
+
+
+#categories main{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#categories .categorieCard{
+    all: unset;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 200px;
+    width: 350px;
+    margin: 10px;
+    padding: 5px;
+    cursor: pointer;
+    transition: height 0.3s ease-in, width 0.3s ease-in;
+}
+
+.link{
+    all: unset;
+}
+
+#categories .categorieCard:hover{
+    height: 210px;
+    width: 360px;
+}
+
+
+#categories .categorieCard h1{
+    font-size: 30px;
+
+}
+
+
+.navbarContainer{
+    width: 100%;
+    height: 60px;
+    background-color: dodgerblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+
 .registrationAndLoginContainer{
     border: 1px solid black;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    margin: 20px;
+    height: auto;
+    padding: 10px;
+}
+
+.registrationAndLoginContainer form{
+    display: flex;
     justify-content: center;
     align-items: center;
-    width: 20%;
-    margin: 20px;
-    padding: 10px;
+    flex-direction: column;
+}
+.registrationAndLoginContainer form input{
+    margin: 5px;
 }
 
 .bodyRegistrationAndLogin{
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,10 +105,7 @@
 
 }
 
-form{
-    display: flex;
-    flex-direction: column
-}
+
 
 .validForm{
     display: flex;
@@ -37,4 +117,72 @@ form{
     opacity: 60%;
     height: 50px;
     width: 100%;
+}
+
+#bodyForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form{
+    padding: 20px;
+    height: auto;
+    width: 40%;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form input{
+    width: 250px;
+}
+
+#books main{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+#books header{
+    padding: 10px;
+}
+
+.bookCard{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border: 2px solid black;
+    width: 400px;
+    height: 350px;
+    border-radius: 5px;
+    margin:0 15px 15px 0;
+}
+
+strong p{
+    text-decoration: underline;
+}
+
+.bookCard .link{
+    margin: 10px;
+}
+
+.infoBook{
+    border-bottom: 2px solid black;
+    padding: 5px 5px 3px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.infoBook2{
+    padding: 8px;
+}
+
+.bookCard h1{
+    font-size: 20px;
+
 }
