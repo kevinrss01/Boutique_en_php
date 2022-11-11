@@ -59,8 +59,6 @@ class UserController extends UserManager
                 $_SESSION['valid'] = '<p class="validForm">Compte créer avec succès ! Veuillez vous connectez.</p>';
                 header('Location: index.php?page=login');
 
-
-
             } else {
                 //Request error
                 echo '<p>Une erreur est survenue lors de l\'inscription</p>';
@@ -81,6 +79,34 @@ class UserController extends UserManager
         else{
             return false;
         }
+    }
+
+    //Get all the users
+    public function findAllUsers(){
+        if(isset($_SESSION['ADMIN'])){
+            ob_start();
+            $users = $this->getAllUsers();
+            require 'views/navbar.php';
+            require 'views/user/listOfUsers.php';
+            $vue = ob_get_clean();
+            return $vue;
+        } else {
+            header('Location: index.php?page=home');
+            $_SESSION['error'] = '<p class="alert alert-danger">Vous n\'avez pas le droit d\'acceder à cette page.🛑</p>';
+        }
+
+    }
+
+    public function updateUserRole($userId, $role){
+        if(isset($_SESSION['ADMIN'])){
+           if($this->changeUserRole($userId, $role) > 0){
+               header('Location: index.php?page=listOfUsers');
+               $_SESSION['valid'] = '<p class="validForm">L\'utilisateur a maintenant le rôle '.$role.'.</p>';
+           }
+        } else {
+            $_SESSION['error'] = '<p class="alert alert-danger">Vous n\'avez pas le droit d\'acceder à cette page.🛑</p>';
+        }
+
     }
 
     //LOGOUT

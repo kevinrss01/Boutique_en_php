@@ -4,7 +4,7 @@
         <?php
         if(isset($_SESSION['ADMIN'])){
             ?>
-            <a href="?page=addCategorie">Ajouter une nouvelle catégorie</a>
+            <a href="?page=categories&action=addCategorie">Ajouter une nouvelle catégorie</a>
             <?php
         }
         ?>
@@ -19,8 +19,8 @@
                     <?php
                     if(isset($_SESSION['ADMIN'])){
                         ?>
-                        <a href="?page=deleteCategorie&id=<?= $c['id'] ?>">Supprimer</a>
-                        <a href="?page=updateCategorie&id=<?= $c['id'] ?>">Modifier</a>
+                        <a href="?page=categories&action=deleteCategorie&id=<?= $c['id'] ?>">Supprimer</a>
+                        <a href="?page=categories&action=updateCategorie&id=<?= $c['id'] ?>">Modifier</a>
                         <?php
                     }
                     ?>

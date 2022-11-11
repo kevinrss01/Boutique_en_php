@@ -2,6 +2,14 @@
 
 class UserManager extends BDD
 {
+    public function getAllUsers(){
+        $sql = 'SELECT * FROM Users';
+        $select = $this->co->prepare($sql);
+        $select->execute();
+
+        return $select->fetchAll();
+    }
+
     public function insertUser($donnees){
         //Hash the password
         $password = $donnees['password'];
@@ -10,13 +18,15 @@ class UserManager extends BDD
         //Insert Data
         $sql = 'INSERT INTO Users (email, password) VALUES (:e, :p)';
         $insert = $this->co->prepare($sql);
+        if ($insert) {
+            trigger_error('This email is already taken', E_USER_WARNING);
+        }
         $insert->execute([
             'e'=>$donnees['email'],
             'p'=>$hash
         ]);
 
         return $insert->rowCount();
-
     }
 
     //Get and verify input of the user
@@ -47,4 +57,17 @@ class UserManager extends BDD
 
         return $select->fetch();
     }
+
+    //Change the role of user
+    public function changeUserRole($userId, $role){
+        $sql = 'UPDATE Users SET role = :r WHERE id = :id';
+        $update = $this->co->prepare($sql);
+        $update->execute([
+            'r' => $role,
+            'id' => $userId
+        ]);
+
+        return $update->rowCount();
+    }
+
 }

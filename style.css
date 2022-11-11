@@ -1,5 +1,7 @@
-*{
-    font-family: Arial;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    font-family: 'Bebas Neue', cursive;
 }
 
 #categories header{
@@ -11,22 +13,6 @@
     padding: 15px;
 }
 
-/*#categories header a{
-    margin: 10px;
-    width: 250px;
-    height: 40px;
-    border: 1px solid black;
-    padding: 3px;
-    text-align: center;
-    border-radius: 10px;
-    transition: font-size 0.3s ease-in;
-}
-
-#categories header a:hover{
-    font-size: 17px;
-
-}*/
-
 
 #categories main{
     display: flex;
@@ -35,6 +21,9 @@
 
 #categories .categorieCard{
     all: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 2px solid black;
     border-radius: 10px;
     height: 200px;
@@ -47,6 +36,10 @@
 
 .link{
     all: unset;
+}
+
+.alert{
+    font-size: 30px;
 }
 
 #categories .categorieCard:hover{
@@ -70,6 +63,10 @@
     align-items: center;
     padding: 15px;
     margin-bottom: 10px;
+}
+
+.navbarContainer a {
+    color: black;
 }
 
 
@@ -117,6 +114,8 @@
     opacity: 60%;
     height: 50px;
     width: 100%;
+    font-size: 23px;
+    color: white;
 }
 
 #bodyForm{
@@ -185,4 +184,42 @@ strong p{
 .bookCard h1{
     font-size: 20px;
 
+}
+
+.listOfUsersBody{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.listOfUsersBody h1{
+    font-size: 30px;
+}
+.listOfUsersBody h2{
+    font-size: 28px;
+}
+.listOfUsersBody .userCard{
+    border: 2px solid black;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+
+}
+
+.listOfUsersContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.listOfUsersBody .userCard a{
+   padding: 5px ;
+}
+.listOfUsersBody .userCard p{
+   padding-right: 5px;
+    margin: 0px;
 }

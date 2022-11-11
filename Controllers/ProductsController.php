@@ -44,15 +44,17 @@ class ProductsController extends ProductsManager
         if(isset($_SESSION['ADMIN'])){
             if($this->isValidProductForm($formulaire)){
                 if($this->insert($formulaire)){
-                    header('Location: index.php?page=home');
+                    header('Location: index.php?page=homeProducts&id=' . $formulaire['categorie']);
                     $_SESSION['valid'] = '<p class="validForm">Livre bien ajouté dans la catégorie !</p>';
                 }
                 else{
+                    $_SESSION['error'] = '<p class="alert alert-danger">Formulaire invalide</p>';
                     echo '<p>Une erreur est survenue lors de l\'ajout du modèle</p>';
                 }
             }
             else{
                 echo '<p>Formulaire invalide</p>';
+                $_SESSION['error'] = '<p class="alert alert-danger">Formulaire invalide</p>';
             }
         } else {
             $_SESSION['error'] = '<p class="alert alert-danger">Vous n\'avez pas le droit d\'acceder à cette page.🛑</p>';
@@ -89,7 +91,8 @@ class ProductsController extends ProductsManager
                     header('Location: index.php?page=homeProducts&id=' . $formulaire['categorie']);
                 }
                 else{
-                    echo '<p>Une erreur est survenue lors de la mise à jour</p>';
+                    header('Location: index.php?page=products&action=updateProduct&id=' . $product_id);
+                    $_SESSION['error'] = '<p class="alert alert-danger">Une erreur est survenu lors de la mise à jour, veuillez réessayer.</p>';
                 }
             }
             else{
@@ -97,6 +100,7 @@ class ProductsController extends ProductsManager
             }
         } else {
             $_SESSION['error'] = '<p class="alert alert-danger">Vous n\'avez pas le droit d\'acceder à cette page.🛑</p>';
+
         }
 
     }
@@ -106,6 +110,7 @@ class ProductsController extends ProductsManager
         if(isset($_SESSION['ADMIN'])){
             if($this->delProduct($product_id) > 0){
                 header('Location: index.php?page=homeProducts&id=' . $categorie_id);
+                $_SESSION['valid'] = '<p class="validForm">Livre supprimé !🎉</p>';
             }
             else{
                 echo '<p>Une erreur est survenue lors de la suppression du produit</p>';

@@ -1,8 +1,13 @@
 <?php
+$title = 'Ajouter';
+if(isset($product)){
+    $btn = 'Mettre à jour';
+    $title = 'Modifier';
+}
 if(isset($_SESSION['ADMIN'])){
     ?>
     <div id="bodyForm">
-        <h1>Ajouter un produit dans la categorie</h1>
+        <h1><?= $title ?> un produit dans la categorie</h1>
         <form action="" method="POST" class="form">
             <label for="nom">Nom : </label>
             <input type="text" name="nom" id="nom"

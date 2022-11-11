@@ -11,7 +11,13 @@
         }
         ?>
         <h1>Livre de la catégorie <?= $categorieName ?></h1>
-        <a href="?page=addProduct&categorieId=<?=$_GET['id'] ?>">Ajouter un nouveau livre</a>
+        <?php
+        if(isset($_SESSION['ADMIN'])){
+            ?>
+            <a href="?page=products&action=addProduct&categorieId=<?=$_GET['id'] ?>">Ajouter un nouveau livre</a>
+            <?php
+        }
+        ?>
     </header>
     <main>
         <?php
@@ -31,13 +37,18 @@
                         <p>Description : <?= $p['description'] ?></p>
                         <p>Quantité restante : <?= $p['quantité'] ?></p>
                     </div>
+
                     <div class="link">
-                        <a href="?page=deleteProduct&id=<?= $p['id'] ?>&categorieId=<?= $p['categorie'] ?>">Supprimer</a>
-                        <a href="?page=updateProduct&id=<?= $p['id'] ?>">Modifier</a>
+                        <?php
+                        if(isset($_SESSION['ADMIN'])){
+                        ?>
+                        <a href="?page=products&action=deleteProduct&id=<?= $p['id'] ?>&categorieId=<?= $p['categorie'] ?>">Supprimer</a>
+                        <a href="?page=products&action=updateProduct&id=<?= $p['id'] ?>">Modifier</a>
+                        <?php
+                    }
+                    ?>
                     </div>
-
                 </div>
-
                 <?php
             }
         } else {
